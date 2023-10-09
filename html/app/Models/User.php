@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class User extends Authenticatable
 {
@@ -18,9 +19,17 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        "uuid",
+        "first_name",
+        "last_name",
+        "username",
+        "email",
+        "email_verified_at",
+        "thumbnail",
+        "profile",
+        "is_privated",
+        "password",
+        "checkpassword"
     ];
 
     /**
@@ -42,4 +51,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+        /**
+     * The roles that belong to the user.
+     */
+    public function follower(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class);
+    }
+
 }
