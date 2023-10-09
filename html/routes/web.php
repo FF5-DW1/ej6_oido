@@ -24,7 +24,7 @@ Route::get('/', function () {
     return view('auth/login');
 });
 
-Route::post('/login', [LoginController::class], 'login');
+Route::post('/login', [AuthenticatedSessionController::class], 'create');
 
 
 Route::get('/signup', function(){
